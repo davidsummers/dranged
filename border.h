@@ -28,7 +28,10 @@ class Border
 
     Element< Container > element_before( )
     {
-      return nullptr;
+      Border itr = m_Itr;
+      --itr;
+      Element< Container > element( itr );
+      return element;
     }
 
     Element< Container > element_after( )

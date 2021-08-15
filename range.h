@@ -37,7 +37,6 @@ class Range
       : m_BeginIndex( Border< container >( container_.begin( ) ) )
       , m_EndIndex(   Border< container >( container_.end(   ) ) )
     {
-      std::cout << "Range Constructor" << std::endl;
     }
 
     Border< container > begin( )

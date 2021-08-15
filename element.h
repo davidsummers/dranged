@@ -24,32 +24,60 @@ class Element
       : m_Itr( itr_ )
     {
     }
-#if 0
+
     explicit operator bool( )
     {
       return m_Valid;
     }
 
+    void SetValid( const bool val_ )
+    {
+      m_Valid = val_;
+    }
+
     Border< Container > border_before( )
     {
-      return nullptr;
+      Border< Container > itr = m_Itr;
+      --itr;
+      return itr;
     }
 
     Border< Container > border_after( )
     {
-      return nullptr;
+      Border< Container > itr = m_Itr;
+      return itr;
     }
 
-    Border< Container > operator ++( )
+    // Prefix
+    Element &operator ++( )
     {
-      return nullptr;
+      ++m_Itr;
+      return *this;
     }
 
-    Border< Container > operator --( )
+    // Postfix
+    Element operator ++( int )
     {
-      return nullptr;
+      Element old = m_Itr;
+      m_Itr++;
+      return old;
     }
-#endif
+
+    // Prefix
+    Element &operator --( )
+    {
+      --m_Itr;
+      return *this;
+    }
+
+    // Postfix
+    Element operator --( int )
+    {
+      Element old = m_Itr;
+      m_Itr--;
+      return old;
+    }
+
     value_type &operator *( )
     {
       return *m_Itr;
