@@ -25,6 +25,12 @@ class Element
     {
     }
 
+    Element( const Border< Container > &itr_, const bool valid_ = false )
+      : m_Itr( itr_.element_after( ).m_Itr )
+      , m_Valid( valid_ )
+    {
+    }
+
     explicit operator bool( )
     {
       return m_Valid;

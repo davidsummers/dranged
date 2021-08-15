@@ -37,6 +37,15 @@ int main( )
      {
        std::cout << "myRng Result: " << val_ << std::endl;
      } );
+
+     if ( auto element = find( myRange, 3 ) )
+     {
+       std::cout << "Element found: " << *element << std::endl;
+     }
+     else
+     {
+       std::cout << "Error No element '3' found." << std::endl;
+     }
   }
 
    return 0;

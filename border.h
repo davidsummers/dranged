@@ -26,7 +26,7 @@ class Border
     {
     }
 
-    Element< Container > element_before( )
+    Element< Container > element_before( ) const
     {
       Border itr = m_Itr;
       --itr;
@@ -34,7 +34,7 @@ class Border
       return element;
     }
 
-    Element< Container > element_after( )
+    Element< Container > element_after( ) const
     {
       Element< Container > element( m_Itr );
       return element;
