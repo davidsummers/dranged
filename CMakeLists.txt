@@ -76,7 +76,10 @@ set( SOURCE_FILES
    )
 
 set( INCLUDE_FILES
-     drange.h
+     algorithms.h
+     border.h
+     element.h
+     range.h
    )
 
 set( TARGET_BUILD_NAME test_drange )

@@ -1,7 +1,8 @@
 #include <iostream>
 #include <vector>
 
-#include "drange.h"
+#include "algorithms.h"
+#include "range.h"
 
 using namespace drange;
 
@@ -9,23 +10,34 @@ int main( )
 {
    std::cout << "Hello, DRANGE world!" << std::endl;
 
-   std::vector< int > myVec { 1, 2, 3, 4, 5 };
+   using IntVec = std::vector< int >;
 
-   std::vector< int > myRange( myVec );
+   IntVec myVec { 1, 2, 3, 4, 5 };
 
-   drange::for_each( myVec, [ ] ( int &val_ )
+   // Test Border.
    {
-     std::cout << "myVec Result: " << val_ << std::endl;
-   } );
+     Border< IntVec > border0;
+     Border< IntVec > border1( myVec.begin( ) );
+     Border< IntVec > bordef2( myVec.end(   ) );
+   }
 
-   drange::for_each( myRange, [ ] ( int &val_ )
+   // Test Element.
    {
-     std::cout << "myRng Result: " << val_ << std::endl;
-   } );
+     Element< IntVec > element0;
+     Element< IntVec > element1( myVec.begin( ) );
+     Element< IntVec > element2( myVec.end(   ) );
+   }
 
-   Element< int > element;
-   Border< int > border;
+   // Test Range.
+   {
 
+     Range myRange( myVec );
+
+     for_each( myRange, [ ] ( int &val_ )
+     {
+       std::cout << "myRng Result: " << val_ << std::endl;
+     } );
+  }
 
    return 0;
 }
