@@ -1,2 +1,18 @@
 The DRANGE library is my version of a Range Library that
 will use the Border/Element design.
+
+The range is delimited by Borders (begin/end).
+
+Each Border is an iterator and also has an element_before( )/element_after( ),
+however it can't be derefenced.
+
+The begin( ) border does not have an element_before( ).
+The end( ) border does not have an element_after( ).
+
+Each Element is and iterator and can also be deferenced to find the value of the element.  It has a border_before( )/border_after( ).
+
+++Element past end is undefined behaviour.
+--Element before beginning is undefined behaviour.
+
+Each Element can be tested as a bool, when returned from algorithms that return
+Elements, to see if the alorithm found an element value.
