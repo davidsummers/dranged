@@ -46,7 +46,32 @@ int main( )
      {
        std::cout << "Error No element '3' found." << std::endl;
      }
+
+     if ( auto element = find_if( myRange, [ ] ( int &value_ )
+          {
+            return value_ == 4;
+          } ) )
+     {
+       std::cout << "Element found: " << *element << std::endl;
+     }
+     else
+     {
+       std::cout << "Element '4' not found." << std::endl;
+     }
+
+     if ( auto element = find_if( myRange, [ ] ( int &value_ )
+          {
+            return value_ == 6;
+          } ) )
+     {
+       std::cout << "Element found: " << *element << std::endl;
+     }
+     else
+     {
+       std::cout << "Element '6' not found." << std::endl;
+     }
+
   }
 
-   return 0;
+  return 0;
 }
