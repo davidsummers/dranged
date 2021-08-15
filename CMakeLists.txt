@@ -6,6 +6,10 @@ cmake_minimum_required( VERSION 3.17 )
 
 project( drange )
 
+set( CMAKE_CXX_STANDARD          17  )
+set( CMAKX_CXX_STANDARD_REQUIRED ON  )
+set( CMAKE_CXX_EXTENSIONS        OFF )
+
 if ( NOT CMAKE_BUILD_TYPE )
   set( CMAKE_BUILD_TYPE Debug )
 endif( )
@@ -46,16 +50,13 @@ if ( APPLE )
   # Standard library.
   add_definitions( -stdlib=libc++ )
 
-  # C++17
-  add_definitions( -std=c++17     )
-
   # Warnings as errors.
   add_definitions( -Werror        )
 
 elseif ( MSVC )
 
- # C++17
-  add_definitions( /std:c++17 /Zc:__cplusplus )
+  # Force setting correct C++ macros.
+  add_definitions( /Zc:__cplusplus )
 
   # Warnings as errors.
   add_definitions( /WX )
@@ -65,23 +66,20 @@ elseif ( MSVC )
 
 else( )
 
-  # C++17
-  add_definitions( -std=c++17 )
-
   # Warnings as errors.
   add_definitions( -Werror )
 
 endif( )
 
 set( SOURCE_FILES
-     drange_test.cpp
+     test_drange.cpp
    )
 
 set( INCLUDE_FILES
      drange.h
    )
 
-set( TARGET_BUILD_NAME drange_test)
+set( TARGET_BUILD_NAME test_drange )
 
 add_executable( ${TARGET_BUILD_NAME}
                 ${SOURCE_FILES}
