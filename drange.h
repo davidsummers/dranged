@@ -56,14 +56,15 @@ class Range
     container m_EndIndex;
 };
 
-template < typename Rng, typename Type >
-void for_each_item( Rng &rng_, std::function< void ( Type &val ) > func_ )
+template < typename Rng, typename F >
+void for_each( Rng &rng_, F && f_ )
 {
+  auto fn = std::function{ std::forward< F >( f_ ) };
   for ( auto itr = rng_.begin( );
         itr != rng_.end( );
         ++itr )
   {
-    func_( *itr );
+    fn( *itr );
   }
 }
 
