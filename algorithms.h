@@ -76,6 +76,7 @@ auto find( Rng &rng_, const Type &value_ )
   return foundElement;
 }
 
+
 ///////////////////////////////////////
 ///
 /// find_if
@@ -95,6 +96,34 @@ auto find_if( Rng &rng_, Func &&f_ )
   {
     Element< container > element = itr;
     if ( fn( *element ) )
+    {
+      element.SetValid ( true );
+      return element;
+    }
+  }
+
+  return rng_.end( ).element_before( );
+}
+
+///////////////////////////////////////
+///
+/// find_if_not
+///
+template < typename Rng, typename Func >
+auto find_if_not( Rng &rng_, Func &&f_ )
+{
+  using container = typename Rng::container;
+
+  auto fn = std::function{ std::forward< Func >( f_ ) };
+
+//  Element< container > foundElement;
+
+  for ( auto itr = rng_.begin( );
+        itr != rng_.end( );
+        ++itr )
+  {
+    Element< container > element = itr;
+    if ( !fn( *element ) )
     {
       element.SetValid ( true );
       return element;
