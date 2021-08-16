@@ -1,4 +1,6 @@
-The DRANGE library is my version of a Range Library that
+                        DRANGED LIBRARY
+
+The DRANGED library is my version of a Range Library that
 will use the Border/Element design.
 
 The range is delimited by Borders (begin/end).
@@ -6,13 +8,21 @@ The range is delimited by Borders (begin/end).
 Each Border is an iterator and also has an element_before( )/element_after( ),
 however it can't be derefenced.
 
-The begin( ) border does not have an element_before( ).
-The end( ) border does not have an element_after( ).
+The begin( ) border does not have an element_before( ), actually just undefined behaviour.
+The end( ) border does not have an element_after( ), actually just undefined behaviour.
 
-Each Element is and iterator and can also be deferenced to find the value of the element.  It has a border_before( )/border_after( ).
+Each Element is an iterator and can also be deferenced to find the value of the element.  It has a border_before( )/border_after( ). A valid element always has a valid border_before( )/border_after( ).
 
 ++Element past end is undefined behaviour.
 --Element before beginning is undefined behaviour.
 
 Each Element can be tested as a bool, when returned from algorithms that return
 Elements, to see if the alorithm found an element value.
+
+For instance:
+
+if ( auto element = find( myVec, 3 ) )
+{
+  // Do something if element found.
+}
+
