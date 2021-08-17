@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "algorithms.h"
+#include "generator.h"
 #include "range.h"
 
 using namespace drange;
