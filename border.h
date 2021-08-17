@@ -70,12 +70,12 @@ class Border
       return old;
     }
 
-    bool operator ==( const Border &rhs_ )
+    bool operator ==( const Border &rhs_ ) const
     {
       return m_Itr == rhs_.m_Itr;
     }
    
-    bool operator !=( const Border &rhs_ )
+    bool operator !=( const Border &rhs_ ) const
     {
       return !( *this == rhs_ );
     }
