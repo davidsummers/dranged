@@ -1,3 +1,5 @@
+#pragma once
+
 // CoRoutine Hello World
 // Example from: https://www.scs.stanford.edu/~dm/blog/c++-coroutines.html
 
