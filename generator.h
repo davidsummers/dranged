@@ -71,6 +71,46 @@ struct Generator
       std::exception_ptr m_Exception;
     };
 
+    // Iterators
+    class iterator
+    {
+      public:
+
+        iterator( Generator &gen_, bool done_ )
+          : m_Generator( gen_ )
+          , m_Done( done_ )
+        {
+        }
+
+        void advance( )
+        {
+          m_Generator.Resume( );
+          bool stillGoing = m_Generator( );
+          m_Done = !stillGoing;
+        }
+
+        iterator &operator++( )
+        {
+          advance( );
+          return *this;
+        }
+
+        T operator *( ) const
+        {
+          return m_Generator( );
+        }
+
+        bool operator !=( const iterator &rhs_ )
+        {
+          return m_Done != rhs_.m_Done;
+        }
+
+      private:
+
+        Generator &m_Generator;
+        bool       m_Done = false;
+    };
+
     // Methods
 
     Generator( HandleType h_ )
@@ -83,17 +123,36 @@ struct Generator
       m_HandleType.destroy( );
     }
 
+    iterator begin( )
+    {
+      return iterator { *this, false };
+    }
+
+    iterator end( )
+    {
+      return iterator { *this, true };
+    }
+
     explicit operator bool( )
     {
-      Fill( );
+      Resume( );
       return !m_HandleType.done( );
     }
 
     T operator ( )( )
     {
-      Fill( );
+      Resume( );
       m_Full = false;
       return std::move( m_HandleType.promise( ).m_Value );
+    }
+
+  protected:
+
+    friend iterator;
+
+    void Resume( )
+    {
+      Fill( );
     }
 
   private:

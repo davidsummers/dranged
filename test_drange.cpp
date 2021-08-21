@@ -1,21 +1,41 @@
+#include <cmath>
 #include <iostream>
 #include <vector>
 
 #include "algorithms.h"
 #include "generator.h"
 #include "range.h"
+#ifdef _EXPERIMENTAL_
+#include "experimental.h"
+#endif
 
 using namespace drange;
 
 // Test generator
 Generator< uint64_t > Counter( )
 {
-for ( uint64_t i = 0; i < 3; )
-{
-  co_yield i++;
-}
+  for ( uint64_t i = 0; i < 3; )
+  {
+    co_yield i++;
+  }
 }
 
+
+#ifdef _EXPERIMENTAL_
+// Test prime generator
+Generator< int > Primes( int max_ )
+{
+  return GenRange( 2, max_ - 1 )
+       | Where( [ ] ( int i_ )
+         {
+           return GenRange( 2, (int) sqrt( i_ ) ) |
+                  All( [ i_ ] ( int j_ )
+                  {
+                    return ( i_ % j_ ) != 0;
+                  } );
+         } );
+}
+#endif
 
 int main( )
 {
@@ -101,12 +121,28 @@ int main( )
 
   }
 
+  // Test normal generator.
   auto gen = Counter( );
   while ( gen )
   {
     std::cout << "CoRoutine output: " << gen( ) << std::endl;
   }
 
+  // Test range_for generator
+  for ( auto nextItem : gen  )
+  {
+    std::cout << "CoRoutine output: " << nextItem << std::endl;
+  } 
+
+#ifdef _EXPERIMENTAL_
+  // Test pipeable code.
+
+  auto nextPrime = Primes( 1000 );
+  while ( nextPrime )
+  {
+    std::cout << "Prime number: " << nextPrime( ) << std::endl;
+  }
+ #endif 
 
   return 0;
 }
