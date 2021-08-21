@@ -39,6 +39,8 @@ else( )
 
   message( "*** Configuring for Linux" )
 
+  add_definitions( -fcoroutines )
+
 endif( )
 
 
