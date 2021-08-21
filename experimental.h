@@ -1,5 +1,7 @@
 #pragma once
 
+#include <type_traits>
+
 #include "generator.h"
 
 // Experimental Pipeable classes
@@ -66,7 +68,7 @@ class select_op : public generator_operator< select_op >
     friend struct generator_operator< select_op >;
 
     template< typename T, typename Fun >
-    static Generator< typename std::result_of< Fun( T ) >::type >
+    static Generator< typename std::invoke_result< Fun( T ) >::type >
     exec( Generator< T > gen_, Fun fun_ )
     {
         for ( auto n : gen_)

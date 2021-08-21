@@ -125,18 +125,19 @@ int main( )
   }
 
   // Test range_for generator
-  for ( auto nextItem : gen  )
+  auto gen1 = Counter( );
+  for ( auto nextItem : gen1  )
   {
     std::cout << "CoRoutine output: " << nextItem << std::endl;
   } 
 
   // Test pipeable code.
-
+#if 0
   auto nextPrime = Primes( 1000 );
   while ( nextPrime )
   {
     std::cout << "Prime number: " << nextPrime( ) << std::endl;
   }
-
+#endif
   return 0;
 }

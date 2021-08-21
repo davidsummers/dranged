@@ -85,8 +85,7 @@ struct Generator
         void advance( )
         {
           m_Generator.Resume( );
-          bool stillGoing = m_Generator( );
-          m_Done = !stillGoing;
+          m_Done = m_Generator.m_HandleType.done( );
         }
 
         iterator &operator++( )
