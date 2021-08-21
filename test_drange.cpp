@@ -7,6 +7,16 @@
 
 using namespace drange;
 
+// Test generator
+Generator< uint64_t > Counter( )
+{
+for ( uint64_t i = 0; i < 3; )
+{
+  co_yield i++;
+}
+}
+
+
 int main( )
 {
    std::cout << "Hello, DRANGE world!" << std::endl;
@@ -90,6 +100,13 @@ int main( )
      }
 
   }
+
+  auto gen = Counter( );
+  while ( gen )
+  {
+    std::cout << "CoRoutine output: " << gen( ) << std::endl;
+  }
+
 
   return 0;
 }
