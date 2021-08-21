@@ -66,10 +66,9 @@ struct Generator
 
       // Data
 
-      T m_Value = 0;
+      T m_Value { };
 
       std::exception_ptr m_Exception;
-
     };
 
     // Methods
