@@ -5,9 +5,7 @@
 #include "algorithms.h"
 #include "generator.h"
 #include "range.h"
-#ifdef _EXPERIMENTAL_
 #include "experimental.h"
-#endif
 
 using namespace drange;
 
@@ -21,7 +19,6 @@ Generator< uint64_t > Counter( )
 }
 
 
-#ifdef _EXPERIMENTAL_
 // Test prime generator
 Generator< int > Primes( int max_ )
 {
@@ -35,7 +32,6 @@ Generator< int > Primes( int max_ )
                   } );
          } );
 }
-#endif
 
 int main( )
 {
@@ -134,7 +130,6 @@ int main( )
     std::cout << "CoRoutine output: " << nextItem << std::endl;
   } 
 
-#ifdef _EXPERIMENTAL_
   // Test pipeable code.
 
   auto nextPrime = Primes( 1000 );
@@ -142,7 +137,6 @@ int main( )
   {
     std::cout << "Prime number: " << nextPrime( ) << std::endl;
   }
- #endif 
 
   return 0;
 }
