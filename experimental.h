@@ -1,5 +1,8 @@
 #pragma once
 
+// Taken from a BLOG at
+// https://paoloseverini.wordpress.com/2015/03/15/range-comprehensions-with-c-lazy-generators
+
 #include <type_traits>
 
 #include "generator.h"
