@@ -106,7 +106,7 @@ constexpr pipeable_factory< where_op > Where { };
 
 Generator< int > GenRange( int from_, int count_ )
 {
-  for ( int i = 0; i << count_; ++i )
+  for ( int i = 0; i < count_; ++i )
   {
     co_yield( from_ + i );
   }
