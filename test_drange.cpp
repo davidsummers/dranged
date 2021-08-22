@@ -9,6 +9,14 @@
 
 using namespace drange;
 
+Generator< int > Integers( int max_ = 0 )
+{
+    for ( int i = 0; max_ == 0 || i <= max_; i++ )
+    {
+      co_yield i;
+    }
+}
+
 // Test generator
 Generator< uint64_t > Counter( )
 {
@@ -130,6 +138,8 @@ int main( )
   {
     std::cout << "CoRoutine output: " << nextItem << std::endl;
   } 
+
+  auto evenIntegers = Integers( 20 ) | Where( [ ] ( int n_ ) { return ( n_ % 2 ) == 0; } );
 
   // Test pipeable code.
 #if 0
