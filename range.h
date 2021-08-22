@@ -8,24 +8,6 @@
 namespace drange
 {
 
-#if 0
-// Declare container template as helper for other templates
-template< typename T >
-struct container
-{
-  container( T t )
-  {
-  }
-
-  template< typename Iter > container( Iter beg, Iter end );
-};
-
-// Additional deduction guide.
-template< typename Iter >
-container( Iter, Iter ) -> container< typename std::iterator_traits< Iter >::value_type >;
-
-#endif
-
 template < class Container >
 class Range
 {
