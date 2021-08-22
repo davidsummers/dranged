@@ -1,3 +1,7 @@
+//
+// C++ exeperimental code takend from a couple of blogs, see the include files.
+//
+
 #include <cmath>
 #include <iostream>
 #include <vector>
