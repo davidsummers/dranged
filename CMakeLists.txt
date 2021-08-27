@@ -81,6 +81,8 @@ set( INCLUDE_FILES
      algorithms.h
      border.h
      element.h
+     experimental.h
+     generator.h
      range.h
    )
 
