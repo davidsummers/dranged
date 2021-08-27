@@ -88,7 +88,7 @@ set( TARGET_BUILD_NAME test_drange )
 
 add_executable( ${TARGET_BUILD_NAME}
                 ${SOURCE_FILES}
-                ${HEADER_FILES}
+                ${INCLUDE_FILES}
               )
 # TODO
 #add_subdirectory( "tests" )
