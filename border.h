@@ -2,7 +2,7 @@
 
 // Border - Like iterator but can't be deferenced.
 
-namespace drange
+namespace dranged
 {
 
 // Forward declare Element
@@ -85,4 +85,4 @@ class Border
     iterator m_Itr;
 };
 
-} // end namespace drange
+} // end namespace dranged

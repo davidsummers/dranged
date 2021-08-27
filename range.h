@@ -5,7 +5,7 @@
 #include "border.h"
 #include "element.h"
 
-namespace drange
+namespace dranged
 {
 
 template < class Container >
@@ -38,4 +38,4 @@ class Range
 };
 
 
-} // End namespace drange
+} // End namespace dranged

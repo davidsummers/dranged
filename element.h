@@ -4,7 +4,7 @@
 
 #include "border.h"
 
-namespace drange
+namespace dranged
 {
 
 template < typename Container >
@@ -95,4 +95,4 @@ class Element
     iterator m_Itr;
 };
 
-} // end namespace drange.
+} // end namespace dranged

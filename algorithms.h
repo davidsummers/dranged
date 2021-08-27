@@ -3,7 +3,7 @@
 #include <functional>
 #include <memory>
 
-namespace drange
+namespace dranged
 {
 
 // Forward declarations.
@@ -133,4 +133,4 @@ auto find_if_not( Rng &rng_, Func &&f_ )
   return rng_.end( ).element_before( );
 }
 
-} // end namespace drange
+} // end namespace dranged

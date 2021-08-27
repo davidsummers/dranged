@@ -1,5 +1,5 @@
 //
-// C++ exeperimental code takend from a couple of blogs, see the include files.
+// C++ experimental code takend from a couple of blogs, see the include files.
 //
 
 #include <cmath>
@@ -11,7 +11,7 @@
 #include "range.h"
 #include "experimental.h"
 
-using namespace drange;
+using namespace dranged;
 
 Generator< int > Integers( int max_ = 0 )
 {
@@ -31,6 +31,8 @@ Generator< uint64_t > Counter( )
 }
 
 
+#if LAZY_C_GENERATORS
+
 // Test prime generator
 Generator< int > Primes( int max_ )
 {
@@ -45,9 +47,11 @@ Generator< int > Primes( int max_ )
          } );
 }
 
+#endif
+
 int main( )
 {
-   std::cout << "Hello, DRANGE world!" << std::endl;
+   std::cout << "Hello, DRANGED world!" << std::endl;
 
    using IntVec = std::vector< int >;
 
@@ -136,17 +140,36 @@ int main( )
     std::cout << "CoRoutine output: " << gen( ) << std::endl;
   }
 
-  // Test range_for generator
+  // Test range_for generator.
   auto gen1 = Counter( );
   for ( auto nextItem : gen1  )
   {
     std::cout << "CoRoutine output: " << nextItem << std::endl;
-  } 
+  }
 
+  // Test range_for on bare generator.
+  for ( auto nextItem : Counter( ) )
+  {
+    std::cout << "CoRoutine output: " << nextItem << std::endl;
+  }
+
+  // Test bare vector to result.
+  {
+    std::vector< int > myInts { 1, 2, 3, 4, 5 };
+    std::vector< int > result;
+    myInts >>= push_back( result );
+    for ( auto item : result )
+    {
+      std::cout << "Item: " << item << std::endl;
+    }
+  }
+
+#if LAZY_C_GENERATORS
   auto evenIntegers = Integers( 20 ) | Where( [ ] ( int n_ ) { return ( n_ % 2 ) == 0; } );
+#endif
 
   // Test pipeable code.
-#if 0
+#if LAZY_C_GENERATORS
   auto nextPrime = Primes( 1000 );
   while ( nextPrime )
   {

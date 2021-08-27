@@ -1,5 +1,46 @@
 #pragma once
 
+#include "range.h"
+
+namespace dranged
+{
+
+struct PipeBase
+{
+};
+
+template< typename PIPE, typename RANGE >
+void operator >>=( RANGE && rng_, PIPE && pipe_ )
+{
+  for ( auto &item : rng_ )
+  {
+    pipe_.send( item );
+  }
+};
+
+template< typename SINK >
+struct push_back
+{
+  push_back( SINK & sink_ )
+    : m_Sink( sink_ )
+  {
+  }
+
+  template< typename VALUE >
+  void send( VALUE && value_ )
+  {
+    m_Sink.push_back( value_ );
+  }
+
+  private:
+
+    SINK & m_Sink;
+};
+
+} // end namespace dranged
+
+#if LAZY_C_GENERATORS
+
 // Taken from a BLOG at
 // https://paoloseverini.wordpress.com/2015/03/15/range-comprehensions-with-c-lazy-generators
 
@@ -39,9 +80,11 @@ struct pipeable_factory
     template< typename ... Args >
     auto operator( )( Args && ... args_ ) const
     {
-        return make_pipeable( std::bind( m_op,
-                                         std::placeholders::_1,
-                                         std::move( args_ ) ... ) );
+        auto bound = std::bind( m_op,
+                                std::placeholders::_1,
+                                std::move( args_ ) ... );
+
+        return make_pipeable( bound );
     }
  
 private:
@@ -104,14 +147,6 @@ class where_op : public generator_operator< where_op >
 
 constexpr pipeable_factory< where_op > Where { };
 
-Generator< int > GenRange( int from_, int count_ )
-{
-  for ( int i = 0; i < count_; ++i )
-  {
-    co_yield( from_ + i );
-  }
-}
-
 
 class all_op : public generator_operator< all_op >
 {
@@ -135,8 +170,10 @@ class all_op : public generator_operator< all_op >
 constexpr pipeable_factory< all_op > All{ };
 
 template< typename T, typename Pipeable >
-auto operator |( Generator< T> && src_, Pipeable && pipe_ )
+auto operator |( Generator< T > && src_, Pipeable && pipe_ )
 {
-    return Pipeable::pipe( std::forward< Generator< T> >( src_ ),
+    return Pipeable::pipe( std::forward< Generator< T > >( src_ ),
                            std::forward< Pipeable >( pipe_ ) );
 }
+
+#endif
