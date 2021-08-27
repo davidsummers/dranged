@@ -5,21 +5,23 @@
 namespace dranged
 {
 
-struct PipeBase
+struct Pipeline
 {
 };
 
 template< typename PIPE, typename RANGE >
-void operator >>=( RANGE && rng_, PIPE && pipe_ )
+Pipeline operator >>=( RANGE && rng_, PIPE && pipe_ )
 {
   for ( auto &item : rng_ )
   {
     pipe_.send( item );
   }
+
+  return pipe_;
 };
 
 template< typename SINK >
-struct push_back
+struct push_back : public Pipeline
 {
   push_back( SINK & sink_ )
     : m_Sink( sink_ )
@@ -35,6 +37,26 @@ struct push_back
   private:
 
     SINK & m_Sink;
+};
+
+template< typename VALUE >
+class transform : public Pipeline
+{
+  public:
+
+    transform( std::function< VALUE ( VALUE && ) > fun_ )
+      : m_Function( fun_ )
+    {
+    }
+
+    void send( VALUE && value_ )
+    {
+
+    }
+
+  private:
+
+    std::function< VALUE ( VALUE && ) > m_Function;
 };
 
 } // end namespace dranged

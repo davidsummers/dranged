@@ -164,6 +164,15 @@ int main( )
     }
   }
 
+#if 0
+  // Test simple transform.
+  {
+    std::vector< int > myInts { 1, 2, 3, 4, 5 };
+    std::vector< int > result;
+    myInts >>= transform( [ ] ( int i_ ) { return i_ * 2; } ) >>= push_back( result );
+  }
+#endif
+
 #if LAZY_C_GENERATORS
   auto evenIntegers = Integers( 20 ) | Where( [ ] ( int n_ ) { return ( n_ % 2 ) == 0; } );
 #endif
