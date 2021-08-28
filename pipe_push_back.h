@@ -1,5 +1,7 @@
 #pragma once
 
+#include "pipe.h"
+
 namespace dranged
 {
 
