@@ -7,9 +7,11 @@
 #include <vector>
 
 #include "algorithms.h"
+#include "element.h"
 #include "generator.h"
+#include "pipe.h"
+#include "pipe_push_back.h"
 #include "range.h"
-#include "experimental.h"
 
 using namespace dranged;
 

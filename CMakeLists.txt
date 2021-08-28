@@ -81,9 +81,15 @@ set( INCLUDE_FILES
      algorithms.h
      border.h
      element.h
-     experimental.h
      generator.h
+     pipe.h
+     pipe_operator.h
+     pipe_push_back.h
+     pipe_range.h
+     pipe_transform.h
+     pipeline.h
      range.h
+     send.h
    )
 
 set( TARGET_BUILD_NAME test_drange )
