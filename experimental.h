@@ -5,59 +5,84 @@
 namespace dranged
 {
 
-struct Pipeline
+struct PipeBase
 {
 };
 
-template< typename PIPE, typename RANGE >
-Pipeline operator >>=( RANGE && rng_, PIPE && pipe_ )
+struct PipelineBase
+{
+};
+
+template< typename PIPELINE, typename RANGE >
+void operator >>=( RANGE && rng_, PIPELINE && pipeline_ )
 {
   for ( auto &item : rng_ )
   {
-    pipe_.send( item );
+    Send( item, pipeline_ );
   }
-
-  return pipe_;
 };
 
-template< typename SINK >
-struct push_back : public Pipeline
+
+template< typename T, typename Pipeline >
+void Send( T && value_, Pipeline && pipeline_ )
 {
-  push_back( SINK & sink_ )
-    : m_Sink( sink_ )
-  {
-  }
+  pipeline_.OnReceive( value_ );
+}
 
-  template< typename VALUE >
-  void send( VALUE && value_ )
-  {
-    m_Sink.push_back( value_ );
-  }
-
-  private:
-
-    SINK & m_Sink;
-};
-
-template< typename VALUE >
-class transform : public Pipeline
+template< typename Container >
+class PushBackPipe : PipeBase
 {
   public:
 
-    transform( std::function< VALUE ( VALUE && ) > fun_ )
+    explicit PushBackPipe( Container &container_ )
+      : m_Container( container_ )
+    {
+    }
+
+
+    template< typename T >
+    void OnReceive( T && value_ )
+    {
+      m_Container.push_back( value_ );
+    }
+
+  private:
+
+    Container &m_Container;
+};
+
+template< typename Container >
+PushBackPipe< Container > push_back( Container & container_ )
+{
+  return PushBackPipe< Container >( container_ );
+}
+
+template< typename FUNCTION >
+class TransformPipe : public PipeBase
+{
+  public:
+
+    explicit TransformPipe( FUNCTION fun_ )
       : m_Function( fun_ )
     {
     }
 
-    void send( VALUE && value_ )
+    template< typename VALUE, typename TailPipeline >
+    void OnReceive( VALUE && value_, TailPipeline && tailPipeline_ )
     {
-
+      Send( m_Function( value_ ), tailPipeline_ );
     }
 
   private:
 
-    std::function< VALUE ( VALUE && ) > m_Function;
+    FUNCTION m_Function;
 };
+
+template< typename Function >
+TransformPipe< Function > transform( Function && function_ )
+{
+  return TransformPipe< Function >{ function_ };
+}
 
 } // end namespace dranged
 

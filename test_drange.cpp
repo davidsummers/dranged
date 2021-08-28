@@ -169,7 +169,8 @@ int main( )
   {
     std::vector< int > myInts { 1, 2, 3, 4, 5 };
     std::vector< int > result;
-    myInts >>= transform( [ ] ( int i_ ) { return i_ * 2; } ) >>= push_back( result );
+    myInts >>= transform( [ ] ( int i_ ) { return i_ * 2; } )
+           >>= push_back( result );
   }
 #endif
 
