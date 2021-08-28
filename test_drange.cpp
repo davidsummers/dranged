@@ -11,6 +11,7 @@
 #include "generator.h"
 #include "pipe_operator.h"
 #include "pipe_push_back.h"
+#include "pipe_source.h"
 #include "pipe_transform.h"
 
 using namespace dranged;
@@ -159,7 +160,7 @@ int main( )
   {
     std::vector< int > myInts { 1, 2, 3, 4, 5 };
     std::vector< int > result;
-    myInts >>= push_back( result );
+    SourcePipe( myInts ) >>= PushBack( result );
     for ( auto item : result )
     {
       std::cout << "Item: " << item << std::endl;

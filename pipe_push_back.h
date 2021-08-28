@@ -28,7 +28,7 @@ class PushBackPipe : PipeBase
 };
 
 template< typename Container >
-PushBackPipe< Container > push_back( Container & container_ )
+PushBackPipe< Container > PushBack( Container & container_ )
 {
   return PushBackPipe< Container >( container_ );
 }

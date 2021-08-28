@@ -6,13 +6,13 @@
 namespace dranged
 {
 
-template< typename PIPELINE, typename RANGE >
-void operator >>=( RANGE && rng_, PIPELINE && pipeline_ )
+template< typename StartPipe, typename Pipeline >
+void operator >>=( StartPipe &&startPipe_, Pipeline &&pipeline_ )
 {
-  for ( auto &item : rng_ )
+  for ( auto &item : startPipe_ )
   {
     Send( item, pipeline_ );
   }
-};
+}
 
 } // end namespace dranged
