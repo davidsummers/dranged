@@ -9,8 +9,8 @@
 #include "algorithms.h"
 #include "element.h"
 #include "generator.h"
+#include "pipe_operator.h"
 #include "pipe_push_back.h"
-#include "pipe_range.h"
 #include "pipe_transform.h"
 
 using namespace dranged;

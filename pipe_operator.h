@@ -1,11 +1,11 @@
 #pragma once
 
 #include "range.h"
+#include "send.h"
 
 namespace dranged
 {
 
-#if 0
 template< typename PIPELINE, typename RANGE >
 void operator >>=( RANGE && rng_, PIPELINE && pipeline_ )
 {
@@ -14,7 +14,5 @@ void operator >>=( RANGE && rng_, PIPELINE && pipeline_ )
     Send( item, pipeline_ );
   }
 };
-
-#endif
 
 } // end namespace dranged

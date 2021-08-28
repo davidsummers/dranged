@@ -85,7 +85,6 @@ set( INCLUDE_FILES
      pipe.h
      pipe_operator.h
      pipe_push_back.h
-     pipe_range.h
      pipe_transform.h
      pipeline.h
      range.h
