@@ -2,4 +2,4 @@
 *.jpg    -text
 *.sh      text eol=lf
 *.txt     text
-*.vcproj  test=crlf
+*.vcproj  text=crlf
