@@ -8,7 +8,7 @@ namespace dranged
 {
 
 template< typename Container >
-class SourcePipe : public PipeSourceBase
+class SourcePipe : public PipeBase
 {
   public:
 
@@ -17,12 +17,12 @@ class SourcePipe : public PipeSourceBase
     {
     }
 
-    Container::iterator begin( )
+    typename Container::iterator begin( )
     {
       return m_Container.begin( );
     }
 
-    Container::iterator end( )
+    typename Container::iterator end( )
     {
       return m_Container.end( );
     }

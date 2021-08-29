@@ -80,6 +80,8 @@ set( SOURCE_FILES
 set( INCLUDE_FILES
      algorithms.h
      border.h
+     concepts.h
+     detect.h
      element.h
      generator.h
      pipe.h

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "pipe.h"
 
 namespace dranged
 {
@@ -26,7 +27,7 @@ class TransformPipe : public PipeBase
 };
 
 template< typename Function >
-TransformPipe< Function > transform( Function && function_ )
+TransformPipe< Function > Transform( Function && function_ )
 {
   return TransformPipe< Function >{ function_ };
 }

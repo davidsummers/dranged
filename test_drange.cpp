@@ -156,26 +156,34 @@ int main( )
     std::cout << "CoRoutine output: " << nextItem << std::endl;
   }
 
-  // Test bare vector to result.
+  // Test Range >>= result.
   {
     std::vector< int > myInts { 1, 2, 3, 4, 5 };
     std::vector< int > result;
-    SourcePipe( myInts ) >>= PushBack( result );
+    myInts >>= PushBack( result );
     for ( auto item : result )
     {
       std::cout << "Item: " << item << std::endl;
     }
   }
 
-#if 0
+  // Test Transform >>= result.
+  {
+    std::vector< int > result;
+    auto pipe = Transform( [ ] ( int i_ ) { return i_ * 2; } ) >>= PushBack( result );
+  }
+
   // Test simple transform.
   {
     std::vector< int > myInts { 1, 2, 3, 4, 5 };
     std::vector< int > result;
-    myInts >>= transform( [ ] ( int i_ ) { return i_ * 2; } )
-           >>= push_back( result );
+    myInts >>= Transform( [ ] ( int i_ ) { return i_ * 2; } )
+           >>= PushBack( result );
+    for ( auto item : result )
+    {
+      std::cout << "Transformed: " << item << std::endl;
+    }
   }
-#endif
 
 #if LAZY_C_GENERATORS
   auto evenIntegers = Integers( 20 ) | Where( [ ] ( int n_ ) { return ( n_ % 2 ) == 0; } );
