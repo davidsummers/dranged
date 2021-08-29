@@ -10,18 +10,9 @@ namespace dranged
   {
   };
 
-  // A PipeSink is something that can receive data from a pipeline and terminate the pipeline.
-  struct PipeSinkBase
-  {
-  };
-
-  // A PipeSource is something that can send data into a pipeline without anything previous.
-  struct PipeSourceBase
-  {
-  };
-
   namespace detail
   {
+#ifdef FUTURE
     template< typename Pipe1, typename Pipe2 >
     struct CompositePipe : public PipeBase
     {
@@ -35,7 +26,7 @@ namespace dranged
       Pipe1 m_Pipe1;
       Pipe2 m_Pipe2;
     };
-
+#endif
   } // end namespace detail
 
 } // end namespace dranged

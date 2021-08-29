@@ -6,7 +6,7 @@
 
 namespace dranged
 {
-
+#ifdef FUTURE
 template< typename Container >
 class SourcePipe : public PipeBase
 {
@@ -31,5 +31,5 @@ class SourcePipe : public PipeBase
 
     Container &m_Container;
 };
-
+#endif
 } // end namespace dranged

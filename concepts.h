@@ -38,14 +38,6 @@ namespace dranged
             // Definition of Pipeline.
             template< typename Pipeline >
             using IsAPipeline = std::enable_if_t< std::is_base_of< PipelineBase, Pipeline >::value, bool >;
-
-            // Definition of a SourcePipe
-            template< typename SourcePipe >
-            using IsASourcePipe = std::enable_if_t< std::is_base_of< PipeSourceBase, SourcePipe >::value, bool >;
-
-            // Definition of a SinkPipe.
-            template< typename SinkPipe >
-            using IsASinkPipe = std::enable_if_t< std::is_base_of< PipeSinkBase, SinkPipe >::value, bool >;
         }
         
         template< typename Range >
@@ -57,11 +49,6 @@ namespace dranged
         template< typename Pipeline >
         using IsAPipeline = impl::IsAPipeline< std::remove_reference_t< Pipeline > >;
 
-        template< typename SourcePipe >
-        using IsASourcePipe = impl::IsASourcePipe< std::remove_reference_t< SourcePipe > >;
-
-        template< typename SinkPipe >
-        using IsASinkPipe = impl::IsASinkPipe< std::remove_reference_t< SinkPipe > >;
     } // end namespace detail
 } // end namespace dranged
 
