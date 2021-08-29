@@ -100,5 +100,5 @@ add_executable( ${TARGET_BUILD_NAME}
                 ${SOURCE_FILES}
                 ${INCLUDE_FILES}
               )
-# TODO
-#add_subdirectory( "tests" )
+
+add_subdirectory( "tests" )
