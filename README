@@ -1,7 +1,17 @@
                         DRANGED LIBRARY
 
+OVERVIEW
+========
+
 The DRANGED library is my version of a Range Library that
-will use the Border/Element design.
+will use the Border/Element design, Pipes/Pipelines, CoRoutine Generators and
+possibly Threaded Generators.
+
+
+The concepts I'm experimenting with are:
+
+RANGES using Border/Element design pattern:
+===========================================
 
 The range is delimited by Borders (begin/end).
 
@@ -25,4 +35,25 @@ if ( auto element = find( myVec, 3 ) )
 {
   // Do something if element found.
 }
+
+GENERATORS using COROUTINES
+===========================
+
+CoRoutines are now a part of the standard library and can be used now
+on Linux, MacOS, and Windows.  They are encapsulated in Generators.
+
+PIPES/PIPELINES
+===============
+
+A pipe is a single stage of a pipeline that does processing on and/or transforms
+its input into an output.
+
+Pipes can be combined together in a pipeline using the >>= operator.
+
+Containers, Ranges and Generators can be used to put values into the start of
+the pipeline.
+
+There will be various classes to collect and process the results.
+
+The first collection class is PushBack which just outputs to an STL container.
 
