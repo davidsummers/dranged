@@ -83,6 +83,7 @@ set( INCLUDE_FILES
      concepts.h
      detect.h
      element.h
+     fwd.h
      generator.h
      pipe.h
      pipe_operator.h
