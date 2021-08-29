@@ -4,7 +4,7 @@
 
 cmake_minimum_required( VERSION 3.17 )
 
-project( drange )
+project( dranged )
 
 set( CMAKE_CXX_STANDARD          20  )
 set( CMAKX_CXX_STANDARD_REQUIRED ON  )
@@ -74,7 +74,7 @@ else( )
 endif( )
 
 set( SOURCE_FILES
-     test_drange.cpp
+     test_dranged.cpp
    )
 
 set( INCLUDE_FILES
@@ -94,7 +94,7 @@ set( INCLUDE_FILES
      send.h
    )
 
-set( TARGET_BUILD_NAME test_drange )
+set( TARGET_BUILD_NAME test_dranged )
 
 add_executable( ${TARGET_BUILD_NAME}
                 ${SOURCE_FILES}
@@ -102,5 +102,3 @@ add_executable( ${TARGET_BUILD_NAME}
               )
 # TODO
 #add_subdirectory( "tests" )
-
-
