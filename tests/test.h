@@ -15,11 +15,11 @@ typedef char * error_t;
 
 error_t error_create( const char * file, int line, const char *errmsg );
 
-#define NO_ERROR ( ( error_t ) 0 )
+#define TEST_NO_ERROR ( ( error_t ) 0 )
 
-#define ERROR( errstr ) return( error_create( __FILE__, __LINE__, errstr ) )
+#define TEST_ERROR( errstr ) return( error_create( __FILE__, __LINE__, errstr ) )
 
-#define WARN( errstr ) { printf( "WARN:  %s(%d): %s\n", __FILE__, __LINE__, errstr ); }
+#define TEST_WARN( errstr ) { printf( "WARN:  %s(%d): %s\n", __FILE__, __LINE__, errstr ); }
 
 /* Prototype for test driver functions. */
 typedef error_t ( *test_driver_t ) ( );
