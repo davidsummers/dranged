@@ -73,32 +73,31 @@ else( )
 
 endif( )
 
-set( SOURCE_FILES
-     test_dranged.cpp
-   )
-
-set( INCLUDE_CORE_FILES
-     include/dranged/core/algorithms.h
-     include/dranged/core/border.h
-     include/dranged/core/element.h
-     include/dranged/core/generator.h
-     include/dranged/core/range.h
+set( INCLUDE_GENERATOR_FILES
+     ${CMAKE_SOURCE_DIR}/include/dranged/generators/generator.h
    )
 
 set( INCLUDE_HELPER_FILES
-     include/dranged/helpers/concepts.h
-     include/dranged/helpers/detect.h
-     include/dranged/helpers/fwd.h
-     include/dranged/helpers/send.h
+     ${CMAKE_SOURCE_DIR}/include/dranged/helpers/concepts.h
+     ${CMAKE_SOURCE_DIR}/include/dranged/helpers/detect.h
+     ${CMAKE_SOURCE_DIR}/include/dranged/helpers/fwd.h
+     ${CMAKE_SOURCE_DIR}/include/dranged/helpers/send.h
    )
 
 set( INCLUDE_PIPE_FILES
-     include/dranged/pipes/pipe_operator.h
-     include/dranged/pipes/pipe_push_back.h
-     include/dranged/pipes/pipe_source.h
-     include/dranged/pipes/pipe_transform.h
-     include/dranged/pipes/pipe.h
-     include/dranged/pipes/pipeline.h
+     ${CMAKE_SOURCE_DIR}/include/dranged/pipes/pipe_operator.h
+     ${CMAKE_SOURCE_DIR}/include/dranged/pipes/pipe_push_back.h
+     ${CMAKE_SOURCE_DIR}/include/dranged/pipes/pipe_source.h
+     ${CMAKE_SOURCE_DIR}/include/dranged/pipes/pipe_transform.h
+     ${CMAKE_SOURCE_DIR}/include/dranged/pipes/pipe.h
+     ${CMAKE_SOURCE_DIR}/include/dranged/pipes/pipeline.h
+   )
+
+set( INCLUDE_RANGE_FILES
+     ${CMAKE_SOURCE_DIR}/include/dranged/ranges/algorithms.h
+     ${CMAKE_SOURCE_DIR}/include/dranged/ranges/border.h
+     ${CMAKE_SOURCE_DIR}/include/dranged/ranges/element.h
+     ${CMAKE_SOURCE_DIR}/include/dranged/ranges/range.h
    )
 
 set( TARGET_BUILD_NAME test_dranged )

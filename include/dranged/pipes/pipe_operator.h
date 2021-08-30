@@ -6,7 +6,7 @@
 #include "dranged/helpers/fwd.h"
 #include "dranged/pipes/pipe.h"
 #include "dranged/pipes/pipeline.h"
-#include "dranged/core/range.h"
+#include "dranged/ranges/range.h"
 #include "dranged/helpers/send.h"
 
 namespace dranged

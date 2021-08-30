@@ -24,14 +24,14 @@
 
 #include "test.h"
 
-#include "dranged/core/algorithms.h"
-#include "dranged/core/border.h"
-#include "dranged/core/element.h"
-#include "dranged/core/generator.h"
-#include "dranged/core/range.h"
+#include "dranged/generators/generator.h"
 #include "dranged/pipes/pipe_operator.h"
 #include "dranged/pipes/pipe_push_back.h"
 #include "dranged/pipes/pipe_transform.h"
+#include "dranged/ranges/algorithms.h"
+#include "dranged/ranges/border.h"
+#include "dranged/ranges/element.h"
+#include "dranged/ranges/range.h"
 
 using namespace dranged;
 

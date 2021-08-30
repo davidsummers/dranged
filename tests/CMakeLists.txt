@@ -12,6 +12,10 @@ set( TEST_INCLUDES
 add_executable( test_dranged
                 ${TEST_SOURCE}
                 ${TEST_INCLUDES}
+                ${INCLUDE_GENERATOR_FILES}
+                ${INCLUDE_HELPER_FILES}
+                ${INCLUDE_PIPE_FILES}
+                ${INCLUDE_RANGE_FILES}
               )
 
 target_include_directories( test_dranged PUBLIC
