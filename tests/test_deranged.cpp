@@ -101,7 +101,6 @@ static error_t test_border( )
 
   // Test iterator on border iterators.
   {
-    bool first = true;
     IntVec myVec { 1, 2, 3, 4, 5 };
     IntVec expected { 1, 2, 3, 4, 5 };
     IntVec result;
@@ -109,15 +108,10 @@ static error_t test_border( )
 
     for ( Border itr = range.begin( );
           itr != range.end( );
-          ++itr )
+          ++itr
+        )
     {
-      if ( first )
-      {
-        first = false;
-        continue;
-      }
-
-      int value = *( itr.element_before( ) );
+      int value = *( itr.element_after( ) );
       result.push_back( value );
     }
 
