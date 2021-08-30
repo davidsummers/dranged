@@ -1,5 +1,5 @@
 //
-// test_date.cpp --- test FavorDate class.
+// test_dranged.cpp --- test DRANGED library.
 //
 
 #ifdef WIN32
@@ -77,13 +77,55 @@ Generator< int > Primes( int max_ )
 
 static error_t test_border( )
 {
-  // Test Border.
-  // Just make sure we can instantiate it.
-  IntVec myVec { 1, 2, 3, 4, 5 };
 
-  Border< IntVec > border0;
-  Border< IntVec > border1( myVec.begin( ) );
-  Border< IntVec > bordef2( myVec.end(   ) );
+  {
+    // Test Border.
+    // Just make sure we can instantiate it.
+    IntVec myVec { 1, 2, 3, 4, 5 };
+    Range range = myVec;
+
+    Border< IntVec > border0;
+    Border< IntVec > bBegin( myVec.begin( ) );
+    Border< IntVec > bEnd( myVec.end(   ) );
+
+    if ( *( bBegin.element_after( ) ) != 1 )
+    {
+      ERROR( "Expected element after begin border to be '1' but it was something else." );
+    }
+
+    if ( *( bEnd.element_before( ) ) != 5 )
+    {
+      ERROR( "Expected last element beofre end border to be '5' but it was something else." );
+    }
+  }
+
+  // Test iterator on border iterators.
+  {
+    bool first = true;
+    IntVec myVec { 1, 2, 3, 4, 5 };
+    IntVec expected { 1, 2, 3, 4, 5 };
+    IntVec result;
+    Range range = myVec;
+
+    for ( Border itr = range.begin( );
+          itr != range.end( );
+          ++itr )
+    {
+      if ( first )
+      {
+        first = false;
+        continue;
+      }
+
+      int value = *( itr.element_before( ) );
+      result.push_back( value );
+    }
+
+    if ( result != expected )
+    {
+      ERROR( "Expected result { 1, 2, 3, 4, 5 } but got something else." );
+    }
+  }
 
   return NO_ERROR;
 }
