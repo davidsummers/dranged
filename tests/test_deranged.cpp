@@ -90,12 +90,12 @@ static error_t test_border( )
 
     if ( *( bBegin.element_after( ) ) != 1 )
     {
-      ERROR( "Expected element after begin border to be '1' but it was something else." );
+      TEST_ERROR( "Expected element after begin border to be '1' but it was something else." );
     }
 
     if ( *( bEnd.element_before( ) ) != 5 )
     {
-      ERROR( "Expected last element beofre end border to be '5' but it was something else." );
+      TEST_ERROR( "Expected last element beofre end border to be '5' but it was something else." );
     }
   }
 
@@ -123,11 +123,11 @@ static error_t test_border( )
 
     if ( result != expected )
     {
-      ERROR( "Expected result { 1, 2, 3, 4, 5 } but got something else." );
+      TEST_ERROR( "Expected result { 1, 2, 3, 4, 5 } but got something else." );
     }
   }
 
-  return NO_ERROR;
+  return TEST_NO_ERROR;
 }
 
 
