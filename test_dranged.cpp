@@ -60,27 +60,7 @@ int main( )
 
    IntVec myVec { 1, 2, 3, 4, 5 };
 
-  // Test normal generator.
-  auto gen = Counter( );
-  while ( gen )
-  {
-    std::cout << "CoRoutine output: " << gen( ) << std::endl;
-  }
-
-  // Test range_for generator.
-  auto gen1 = Counter( );
-  for ( auto nextItem : gen1  )
-  {
-    std::cout << "CoRoutine output: " << nextItem << std::endl;
-  }
-
-  // Test range_for on bare generator.
-  for ( auto nextItem : Counter( ) )
-  {
-    std::cout << "CoRoutine output: " << nextItem << std::endl;
-  }
-
-  // Test Range >>= result.
+  // Test pipes: Range >>= result.
   {
     std::vector< int > myInts { 1, 2, 3, 4, 5 };
     std::vector< int > result;
@@ -91,7 +71,7 @@ int main( )
     }
   }
 
-  // Test Transform >>= result.
+  // Test pipes: Transform >>= result.
   {
     std::vector< int > result;
     auto pipe = Transform( [ ] ( int i_ ) { return i_ * 2; } ) >>= PushBack( result );
