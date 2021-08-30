@@ -158,10 +158,10 @@ static error_t test_range_for_each( )
 
   if ( myVec != result )
   {
-    ERROR( "Result vector didn't match original vector." );
+    TEST_ERROR( "Result vector didn't match original vector." );
   }
 
-  return NO_ERROR;
+  return TEST_NO_ERROR;
 }
 
 static error_t test_range_find( )
@@ -172,10 +172,10 @@ static error_t test_range_find( )
   // Test 'find'.
   if ( auto element = find( myRange, 3 ); *element != 3 )
   {
-    ERROR( "Element '3' was not at position 3." );
+    TEST_ERROR( "Element '3' was not at position 3." );
   }
 
-  return NO_ERROR;
+  return TEST_NO_ERROR;
 }
 
 static error_t test_range_find_if( )
@@ -189,7 +189,7 @@ static error_t test_range_find_if( )
                         return value_ == 4;
                       } ); *element != 4 )
   {
-    ERROR( "Element '4' was not at position 4." );
+    TEST_ERROR( "Element '4' was not at position 4." );
   }
 
   // Test not found.
@@ -198,10 +198,10 @@ static error_t test_range_find_if( )
                         return value_ == 6;
                       } ) )
   {
-    ERROR( "Error: Element value 6 was found but should not have been found." );
+    TEST_ERROR( "Error: Element value 6 was found but should not have been found." );
   }
 
-  return NO_ERROR;
+  return TEST_NO_ERROR;
 }
 
 static error_t test_range_find_if_not( )
@@ -214,10 +214,10 @@ static error_t test_range_find_if_not( )
                         return value_ == 7;
                       } ); !element )
   {
-    ERROR( "Error: Element '7' found when it should not have been." );
+    TEST_ERROR( "Error: Element '7' found when it should not have been." );
   }
 
-  return NO_ERROR;
+  return TEST_NO_ERROR;
 }
 
 static error_t test_generator( )
@@ -235,7 +235,7 @@ static error_t test_generator( )
 
     if ( result != expected )
     {
-      ERROR( "Expected vector { 1, 2, 3 } but got something else." );
+      TEST_ERROR( "Expected vector { 1, 2, 3 } but got something else." );
     }
   }
 
@@ -252,7 +252,7 @@ static error_t test_generator( )
 
     if ( result != expected )
     {
-      ERROR( "Expected vector { 1, 2, 3 } but got something else." );
+      TEST_ERROR( "Expected vector { 1, 2, 3 } but got something else." );
     }
   }
 
@@ -269,11 +269,11 @@ static error_t test_generator( )
 
     if ( result != expected )
     {
-      ERROR( "Expected vector { 1, 2, 3 } but got something else." );
+      TEST_ERROR( "Expected vector { 1, 2, 3 } but got something else." );
     }
   }
 
-  return NO_ERROR;
+  return TEST_NO_ERROR;
 }
 
 static error_t test_pipe_range_to_pipe( )
@@ -289,11 +289,11 @@ static error_t test_pipe_range_to_pipe( )
 
     if ( result != expected )
     {
-      ERROR( "Expected vecotr { 1, 2, 3, 4, 5 } but got something else." );
+      TEST_ERROR( "Expected vecotr { 1, 2, 3, 4, 5 } but got something else." );
     }
   }
 
-  return NO_ERROR;
+  return TEST_NO_ERROR;
 }
 
 static error_t test_pipe_transform( )
@@ -310,7 +310,7 @@ static error_t test_pipe_transform( )
 
     if ( result != expected )
     {
-      ERROR( "Expected vecotr { 1, 2, 3, 4, 5 } but got something else." );
+      TEST_ERROR( "Expected vecotr { 1, 2, 3, 4, 5 } but got something else." );
     }
   }
 
@@ -326,11 +326,11 @@ static error_t test_pipe_transform( )
 
     if ( result != expected )
     {
-      ERROR( "Expected result vecot { 2, 4, 6, 8, 10 } but got something else." );
+      TEST_ERROR( "Expected result vecot { 2, 4, 6, 8, 10 } but got something else." );
     }
   }
 
-  return NO_ERROR;
+  return TEST_NO_ERROR;
 }
 
 #ifdef FURUE
