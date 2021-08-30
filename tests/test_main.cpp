@@ -142,7 +142,7 @@ static int do_test_num( const char *progname,
   fflush( stdout );
 
   /* Fail on unexpected result -- FAIL or XPASS. */
-  return (err != NO_ERROR) != (xfail != 0);
+  return (err != TEST_NO_ERROR) != (xfail != 0);
 }
 
 

@@ -135,7 +135,7 @@ static error_t test_element( )
   Element< IntVec > element1( myVec.begin( ) );
   Element< IntVec > element2( myVec.end(   ) );
 
-  return NO_ERROR;
+  return TEST_NO_ERROR;
 }
 
 static error_t test_range_for_each( )
