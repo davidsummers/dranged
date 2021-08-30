@@ -58,48 +58,6 @@ int main( )
 
    using IntVec = std::vector< int >;
 
-   IntVec myVec { 1, 2, 3, 4, 5 };
 
-  // Test pipes: Range >>= result.
-  {
-    std::vector< int > myInts { 1, 2, 3, 4, 5 };
-    std::vector< int > result;
-    myInts >>= PushBack( result );
-    for ( auto item : result )
-    {
-      std::cout << "Item: " << item << std::endl;
-    }
-  }
-
-  // Test pipes: Transform >>= result.
-  {
-    std::vector< int > result;
-    auto pipe = Transform( [ ] ( int i_ ) { return i_ * 2; } ) >>= PushBack( result );
-  }
-
-  // Test simple transform.
-  {
-    std::vector< int > myInts { 1, 2, 3, 4, 5 };
-    std::vector< int > result;
-    myInts >>= Transform( [ ] ( int i_ ) { return i_ * 2; } )
-           >>= PushBack( result );
-    for ( auto item : result )
-    {
-      std::cout << "Transformed: " << item << std::endl;
-    }
-  }
-
-#if LAZY_C_GENERATORS
-  auto evenIntegers = Integers( 20 ) | Where( [ ] ( int n_ ) { return ( n_ % 2 ) == 0; } );
-#endif
-
-  // Test pipeable code.
-#if LAZY_C_GENERATORS
-  auto nextPrime = Primes( 1000 );
-  while ( nextPrime )
-  {
-    std::cout << "Prime number: " << nextPrime( ) << std::endl;
-  }
-#endif
   return 0;
 }

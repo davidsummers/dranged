@@ -29,6 +29,9 @@
 #include "dranged/core/element.h"
 #include "dranged/core/generator.h"
 #include "dranged/core/range.h"
+#include "dranged/pipes/pipe_operator.h"
+#include "dranged/pipes/pipe_push_back.h"
+#include "dranged/pipes/pipe_transform.h"
 
 using namespace dranged;
 
@@ -231,17 +234,89 @@ static error_t test_generator( )
   return NO_ERROR;
 }
 
+static error_t test_pipe_range_to_pipe( )
+{
+  // Test pipes: Range >>= result.
+  {
+    std::vector< int > myInts { 1, 2, 3, 4, 5 };
+    std::vector< int > result;
+
+    myInts >>= PushBack( result );
+
+    std::vector< int > expected { 1, 2, 3, 4, 5 };
+
+    if ( result != expected )
+    {
+      ERROR( "Expected vecotr { 1, 2, 3, 4, 5 } but got something else." );
+    }
+  }
+
+  return NO_ERROR;
+}
+
+static error_t test_pipe_transform( )
+{
+  // Test pipes: Transform >>= result.
+  // This just tests that we can set up the pipe but it doesn't do anything
+  // because there is no source to the pipe.
+  {
+    std::vector< int > result;
+
+    auto pipe = Transform( [ ] ( int i_ ) { return i_ * 2; } ) >>= PushBack( result );
+
+    std::vector< int > expected;
+
+    if ( result != expected )
+    {
+      ERROR( "Expected vecotr { 1, 2, 3, 4, 5 } but got something else." );
+    }
+  }
+
+  // Test simple transform.
+  {
+    std::vector< int > myInts { 1, 2, 3, 4, 5 };
+    std::vector< int > result;
+
+    myInts >>= Transform( [ ] ( int i_ ) { return i_ * 2; } )
+           >>= PushBack( result );
+
+    std::vector< int > expected { 2, 4, 6, 8, 10 };
+
+    if ( result != expected )
+    {
+      ERROR( "Expected result vecot { 2, 4, 6, 8, 10 } but got something else." );
+    }
+  }
+
+  return NO_ERROR;
+}
+
+#ifdef FURUE
+  auto evenIntegers = Integers( 20 ) | Where( [ ] ( int n_ ) { return ( n_ % 2 ) == 0; } );
+#endif
+
+  // Test pipeable code.
+#ifdef FUTURE
+  auto nextPrime = Primes( 1000 );
+  while ( nextPrime )
+  {
+    std::cout << "Prime number: " << nextPrime( ) << std::endl;
+  }
+#endif
+
 /* The test table.  */
 
 struct test_descriptor_t test_funcs[] =
 {
   TEST_NULL,
-  TEST_PASS( test_border,            "Basic Border Tests" ),
-  TEST_PASS( test_element,           "Basic Element Tests" ),
-  TEST_PASS( test_range_for_each,    "Basic Range for_each Tests" ),
-  TEST_PASS( test_range_find,        "Basic Range find Tests" ),
-  TEST_PASS( test_range_find_if,     "Basic Range find_if Tests" ),
-  TEST_PASS( test_range_find_if_not, "Basic Range find_if_not Tests" ),
-  TEST_PASS( test_generator,         "Basic Generator Tests" ),
+  TEST_PASS( test_border,             "Basic Border Tests" ),
+  TEST_PASS( test_element,            "Basic Element Tests" ),
+  TEST_PASS( test_range_for_each,     "Basic Range for_each Tests" ),
+  TEST_PASS( test_range_find,         "Basic Range find Tests" ),
+  TEST_PASS( test_range_find_if,      "Basic Range find_if Tests" ),
+  TEST_PASS( test_range_find_if_not,  "Basic Range find_if_not Tests" ),
+  TEST_PASS( test_generator,          "Basic Generator Tests" ),
+  TEST_PASS( test_pipe_range_to_pipe, "Basic Pipe Range to Pipe Tests." ),
+  TEST_PASS( test_pipe_transform,     "Basic Pipe Transform Tests." ),
   TEST_NULL
 };

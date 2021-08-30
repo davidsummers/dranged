@@ -103,15 +103,4 @@ set( INCLUDE_PIPE_FILES
 
 set( TARGET_BUILD_NAME test_dranged )
 
-add_executable( ${TARGET_BUILD_NAME}
-                ${SOURCE_FILES}
-                ${INCLUDE_CORE_FILES}
-                ${INCLUDE_HELPER_FILES}
-                ${INCLUDE_PIPE_FILES}
-              )
-
-target_include_directories( ${TARGET_BUILD_NAME} PUBLIC
-                           "./include"
-                          )
-
 add_subdirectory( "tests" )
