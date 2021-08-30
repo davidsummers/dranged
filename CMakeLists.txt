@@ -77,29 +77,41 @@ set( SOURCE_FILES
      test_dranged.cpp
    )
 
-set( INCLUDE_FILES
-     algorithms.h
-     border.h
-     concepts.h
-     detect.h
-     element.h
-     fwd.h
-     generator.h
-     pipe.h
-     pipe_operator.h
-     pipe_push_back.h
-     pipe_source.h
-     pipe_transform.h
-     pipeline.h
-     range.h
-     send.h
+set( INCLUDE_CORE_FILES
+     include/dranged/core/algorithms.h
+     include/dranged/core/border.h
+     include/dranged/core/element.h
+     include/dranged/core/generator.h
+     include/dranged/core/range.h
+   )
+
+set( INCLUDE_HELPER_FILES
+     include/dranged/helpers/concepts.h
+     include/dranged/helpers/detect.h
+     include/dranged/helpers/fwd.h
+     include/dranged/helpers/send.h
+   )
+
+set( INCLUDE_PIPE_FILES
+     include/dranged/pipes/pipe_operator.h
+     include/dranged/pipes/pipe_push_back.h
+     include/dranged/pipes/pipe_source.h
+     include/dranged/pipes/pipe_transform.h
+     include/dranged/pipes/pipe.h
+     include/dranged/pipes/pipeline.h
    )
 
 set( TARGET_BUILD_NAME test_dranged )
 
 add_executable( ${TARGET_BUILD_NAME}
                 ${SOURCE_FILES}
-                ${INCLUDE_FILES}
+                ${INCLUDE_CORE_FILES}
+                ${INCLUDE_HELPER_FILES}
+                ${INCLUDE_PIPE_FILES}
               )
+
+target_include_directories( ${TARGET_BUILD_NAME} PUBLIC
+                           "./include"
+                          )
 
 add_subdirectory( "tests" )

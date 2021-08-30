@@ -1,8 +1,8 @@
 #pragma once
 
-#include "pipe.h"
-#include "range.h"
-#include "send.h"
+#include "dranged/pipes/pipe.h"
+#include "dranged/core/range.h"
+#include "dranged/helpers/send.h"
 
 namespace dranged
 {

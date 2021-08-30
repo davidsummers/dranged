@@ -6,13 +6,13 @@
 #include <iostream>
 #include <vector>
 
-#include "algorithms.h"
-#include "element.h"
-#include "generator.h"
-#include "pipe_operator.h"
-#include "pipe_push_back.h"
-#include "pipe_source.h"
-#include "pipe_transform.h"
+#include "dranged/core/algorithms.h"
+#include "dranged/core/element.h"
+#include "dranged/core/generator.h"
+#include "dranged/pipes/pipe_operator.h"
+#include "dranged/pipes/pipe_push_back.h"
+#include "dranged/pipes/pipe_source.h"
+#include "dranged/pipes/pipe_transform.h"
 
 using namespace dranged;
 

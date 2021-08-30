@@ -7,6 +7,7 @@
 #include <windows.h>
 #endif
 
+#include <iostream>
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
@@ -15,21 +16,40 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <math.h>
-#include <iostream>
+#include <vector>
 
 #ifndef WIN32
 #include <unistd.h>
 #endif
 
 #include "test.h"
-//#include "date.h"
+
+#include "dranged/core/border.h"
+#include "dranged/core/element.h"
+
+using namespace dranged;
+
+using IntVec = std::vector< int >;
 
 // The tests.
 
-static error_t test_1( )
+static error_t test_border( )
 {
-#if 0 // TESTS GO HERE
-#endif
+  // Test Border.
+  // Just make sure we can instantiate it.
+  IntVec myVec { 1, 2, 3, 4, 5 };
+
+  Border< IntVec > border0;
+  Border< IntVec > border1( myVec.begin( ) );
+  Border< IntVec > bordef2( myVec.end(   ) );
+
+  return NO_ERROR;
+}
+
+
+static error_t test_element( )
+{
+
   return NO_ERROR;
 }
 
@@ -39,6 +59,6 @@ static error_t test_1( )
 struct test_descriptor_t test_funcs[] =
 {
   TEST_NULL,
-  TEST_PASS( test_1,       "Basic Range Tests" ),
+  TEST_PASS( test_border, "Basic Border Tests" ),
   TEST_NULL
 };

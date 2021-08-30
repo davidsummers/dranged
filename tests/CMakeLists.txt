@@ -13,3 +13,7 @@ add_executable( test_dranged1
                 ${TEST_SOURCE}
                 ${TEST_INCLUDES}
               )
+
+target_include_directories( test_dranged1 PUBLIC
+                            ${CMAKE_SOURCE_DIR}/include
+                          )

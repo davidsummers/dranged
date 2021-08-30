@@ -1,8 +1,8 @@
 #pragma once
 
-#include "detect.h"
-#include "pipe.h"
-#include "pipeline.h"
+#include "dranged/helpers/detect.h"
+#include "dranged/pipes/pipe.h"
+#include "dranged/pipes/pipeline.h"
 
 namespace dranged
 {

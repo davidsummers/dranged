@@ -2,12 +2,12 @@
 
 #include <type_traits>
 
-#include "concepts.h"
-#include "fwd.h"
-#include "pipe.h"
-#include "pipeline.h"
-#include "range.h"
-#include "send.h"
+#include "dranged/helpers/concepts.h"
+#include "dranged/helpers/fwd.h"
+#include "dranged/pipes/pipe.h"
+#include "dranged/pipes/pipeline.h"
+#include "dranged/core/range.h"
+#include "dranged/helpers/send.h"
 
 namespace dranged
 {
