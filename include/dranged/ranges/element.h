@@ -89,6 +89,16 @@ class Element
       return *m_Itr;
     }
 
+    bool operator ==( const Element &rhs_ ) const
+    {
+      return m_Itr == rhs_.m_Itr;
+    }
+
+    bool operator !=( const Element &rhs_ ) const
+    {
+      return !( *this == rhs_ );
+    }
+
   private:
 
     bool     m_Valid = false;

@@ -127,13 +127,37 @@ static error_t test_border( )
 
 static error_t test_element( )
 {
-  // Test Element.
-  // At the moment, just make sure we can instantiate it.
-  IntVec myVec { 1, 2, 3, 4, 5 };
+  {
+    // Test Element.
+    // At the moment, just make sure we can instantiate it.
+    IntVec myVec { 1, 2, 3, 4, 5 };
 
-  Element< IntVec > element0;
-  Element< IntVec > element1( myVec.begin( ) );
-  Element< IntVec > element2( myVec.end(   ) );
+    Element< IntVec > element0;
+    Element< IntVec > element1( myVec.begin( ) );
+    Element< IntVec > element2( myVec.end(   ) );
+  }
+
+  // Test iterator on element iterators.
+  {
+    IntVec myVec { 1, 2, 3, 4, 5 };
+    IntVec expected { 1, 2, 3, 4, 5 };
+    IntVec result;
+    Range range = myVec;
+
+    for ( Element itr = range.begin( );
+          itr != range.end( );
+          ++itr
+        )
+    {
+      int value = *itr;
+      result.push_back( value );
+    }
+
+    if ( result != expected )
+    {
+      TEST_ERROR( "Expected result { 1, 2, 3, 4, 5 } but got something else." );
+    }
+  }
 
   return TEST_NO_ERROR;
 }
