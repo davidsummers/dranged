@@ -381,6 +381,22 @@ static ErrorT test_pipe_transform( )
     }
   }
 
+  // Test more complex transform, int -> string.
+  {
+    std::vector< int > myInts { 1, 2, 3, 4, 5 };
+    std::vector< std::string > result;
+
+    myInts >>= Transform( [ ] ( int i_ ) { return std::to_string( i_ ); } )
+           >>= PushBack( result );
+
+    std::vector< std::string > expected { "1", "2", "3", "4", "5" };
+
+    if ( result != expected )
+    {
+      TEST_ERROR( R"(Expected result vector { "1", "2", "3", "4", "5" } but got something else.)" );
+    }
+  }
+
   return TEST_NO_ERROR;
 }
 
