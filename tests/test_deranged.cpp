@@ -75,7 +75,7 @@ Generator< int > Primes( int max_ )
 
 // The tests.
 
-static error_t test_border( )
+static ErrorT test_border( )
 {
 
   {
@@ -125,7 +125,7 @@ static error_t test_border( )
 }
 
 
-static error_t test_element( )
+static ErrorT test_element( )
 {
   {
     // Test Element.
@@ -162,7 +162,7 @@ static error_t test_element( )
   return TEST_NO_ERROR;
 }
 
-static error_t test_range_for_each( )
+static ErrorT test_range_for_each( )
 {
   IntVec myVec { 1, 2, 3, 4, 5 };
   Range myRange( myVec );
@@ -182,7 +182,7 @@ static error_t test_range_for_each( )
   return TEST_NO_ERROR;
 }
 
-static error_t test_range_find( )
+static ErrorT test_range_find( )
 {
   IntVec myVec { 1, 2, 3, 4, 5 };
   Range myRange( myVec );
@@ -196,7 +196,7 @@ static error_t test_range_find( )
   return TEST_NO_ERROR;
 }
 
-static error_t test_range_find_if( )
+static ErrorT test_range_find_if( )
 {
   IntVec myVec { 1, 2, 3, 4, 5 };
   Range myRange( myVec );
@@ -222,7 +222,7 @@ static error_t test_range_find_if( )
   return TEST_NO_ERROR;
 }
 
-static error_t test_range_find_if_not( )
+static ErrorT test_range_find_if_not( )
 {
   IntVec myVec { 1, 2, 3, 4, 5 };
   Range myRange( myVec );
@@ -238,7 +238,7 @@ static error_t test_range_find_if_not( )
   return TEST_NO_ERROR;
 }
 
-static error_t test_generator( )
+static ErrorT test_generator( )
 {
   // Test normal generator.
   {
@@ -294,7 +294,7 @@ static error_t test_generator( )
   return TEST_NO_ERROR;
 }
 
-static error_t test_generator_to_pipe( )
+static ErrorT test_generator_to_pipe( )
 {
   // Test basic generator to pipe.
   {
@@ -327,7 +327,7 @@ static error_t test_generator_to_pipe( )
   return TEST_NO_ERROR;
 }
 
-static error_t test_pipe_range_to_pipe( )
+static ErrorT test_pipe_range_to_pipe( )
 {
   // Test pipes: Range >>= result.
   {
@@ -347,7 +347,7 @@ static error_t test_pipe_range_to_pipe( )
   return TEST_NO_ERROR;
 }
 
-static error_t test_pipe_transform( )
+static ErrorT test_pipe_transform( )
 {
   // Test pipes: Transform >>= result.
   // This just tests that we can set up the pipe but it doesn't do anything

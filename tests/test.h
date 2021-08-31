@@ -11,18 +11,18 @@
 extern "C" {
 #endif /* __cplusplus */
 
-typedef char * error_t;
+using ErrorT = char *;
 
-error_t error_create( const char * file, int line, const char *errmsg );
+ErrorT error_create( const char * file, int line, const char *errmsg );
 
-#define TEST_NO_ERROR ( ( error_t ) 0 )
+#define TEST_NO_ERROR ( ( ErrorT ) 0 )
 
 #define TEST_ERROR( errstr ) return( error_create( __FILE__, __LINE__, errstr ) )
 
 #define TEST_WARN( errstr ) { printf( "WARN:  %s(%d): %s\n", __FILE__, __LINE__, errstr ); }
 
 /* Prototype for test driver functions. */
-typedef error_t ( *test_driver_t ) ( );
+typedef ErrorT ( *test_driver_t ) ( );
 
 /* All test programs include an array of test descriptors
    (all of our sub-tests) that begins and ends with a TEST_NULL entry. */

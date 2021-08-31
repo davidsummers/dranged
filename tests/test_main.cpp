@@ -41,7 +41,7 @@ uint32_t test_rand ( uint32_t *seed )
 }
 
 
-error_t error_create( const char *file, int line, const char *errmsg )
+ErrorT error_create( const char *file, int line, const char *errmsg )
 {
   static char buf[BUFSIZ];
   
@@ -87,7 +87,7 @@ static int do_test_num( const char *progname,
 {
   test_driver_t func;
   int xfail;
-  error_t err;
+  ErrorT err;
   int array_size = get_array_size( );
   const char *msg = 0;  /* the message this individual test prints out */
 
