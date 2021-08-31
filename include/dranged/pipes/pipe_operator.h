@@ -27,7 +27,7 @@ namespace dranged
   template< typename Range, typename Pipeline, detail::IsARange< Range > = true, detail::IsAPipeline< Pipeline > = true >
   std::enable_if_t< std::is_lvalue_reference< Range >::value > operator >>=( Range && range_, Pipeline && pipeline_ )
   {
-    for ( auto &item : range_ )
+    for ( auto const &item : range_ )
     {
       Send( item, pipeline_ );
     }
@@ -38,7 +38,7 @@ namespace dranged
   template< typename Range, typename Pipe, detail::IsARange< Range > = true, detail::IsAPipe< Pipe > = true >
   std::enable_if_t< std::is_lvalue_reference< Range >::value > operator >>=( Range && range_, Pipe && pipe_ )
   {
-    for ( auto &item : range_ )
+    for ( auto const &item : range_ )
     {
       Send( item, pipe_ );
     }

@@ -294,6 +294,39 @@ static error_t test_generator( )
   return TEST_NO_ERROR;
 }
 
+static error_t test_generator_to_pipe( )
+{
+  // Test basic generator to pipe.
+  {
+    IntVec results;
+    auto gen = Counter( );
+
+    gen >>= PushBack( results );
+
+    IntVec expected { 0, 1, 2 };
+    if ( results != expected )
+    {
+      TEST_ERROR( "Expected vector { 1, 2, 3 } but got something else." );
+    }
+  }
+
+  // Test basic generator to pipeline.
+  {
+    IntVec results;
+    auto gen = Counter( );
+
+    gen >>= Transform( [ ] ( int i_ ) { return i_ * 3; } ) >>= PushBack( results );
+
+    IntVec expected { 0, 3, 6 };
+    if ( results != expected )
+    {
+      TEST_ERROR( "Expected vector { 1, 3, 6 } but got something else." );
+    }
+  }
+
+  return TEST_NO_ERROR;
+}
+
 static error_t test_pipe_range_to_pipe( )
 {
   // Test pipes: Range >>= result.
@@ -351,7 +384,7 @@ static error_t test_pipe_transform( )
   return TEST_NO_ERROR;
 }
 
-#ifdef FURUE
+#ifdef FUTURE
   auto evenIntegers = Integers( 20 ) | Where( [ ] ( int n_ ) { return ( n_ % 2 ) == 0; } );
 #endif
 
@@ -376,6 +409,7 @@ struct test_descriptor_t test_funcs[] =
   TEST_PASS( test_range_find_if,      "Basic Range find_if Tests" ),
   TEST_PASS( test_range_find_if_not,  "Basic Range find_if_not Tests" ),
   TEST_PASS( test_generator,          "Basic Generator Tests" ),
+  TEST_PASS( test_generator_to_pipe,  "Basic Generator to Pipe Tests" ),
   TEST_PASS( test_pipe_range_to_pipe, "Basic Pipe Range to Pipe Tests." ),
   TEST_PASS( test_pipe_transform,     "Basic Pipe Transform Tests." ),
   TEST_NULL
