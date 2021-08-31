@@ -306,7 +306,7 @@ static error_t test_generator_to_pipe( )
     IntVec expected { 0, 1, 2 };
     if ( results != expected )
     {
-      TEST_ERROR( "Expected vector { 1, 2, 3 } but got something else." );
+      TEST_ERROR( "Expected vector { 0, 1, 2 } but got something else." );
     }
   }
 
@@ -320,7 +320,7 @@ static error_t test_generator_to_pipe( )
     IntVec expected { 0, 3, 6 };
     if ( results != expected )
     {
-      TEST_ERROR( "Expected vector { 1, 3, 6 } but got something else." );
+      TEST_ERROR( "Expected vector { 0, 3, 6 } but got something else." );
     }
   }
 
