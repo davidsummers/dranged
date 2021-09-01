@@ -38,9 +38,9 @@ using namespace dranged;
 
 using IntVec = std::vector< int >;
 
-Generator< int > Integers( int max_ = 0 )
+Generator< int > Integers( int start_ = 0, uint64_t max_ = 0 )
 {
-    for ( int i = 0; max_ == 0 || i <= max_; i++ )
+    for ( int i = start_; max_ == 0 || i <= max_; i++ )
     {
       co_yield i;
     }
@@ -55,6 +55,32 @@ Generator< uint64_t > Counter( )
   }
 }
 
+template< typename TYPE >
+std::string PrintVector( const TYPE &vector_ )
+{
+  std::stringstream ss;
+
+  ss << "{ ";
+
+  bool first = true;
+
+  for ( const auto &item : vector_ )
+  {
+    if ( first )
+    {
+      first = false;
+    }
+    else
+    {
+      ss << ", ";
+    }
+
+    ss << item;
+  }
+
+  ss << " }";
+  return ss.str( );
+}
 
 #ifdef FUTURE
 
@@ -118,7 +144,9 @@ static ErrorT test_border( )
 
     if ( result != expected )
     {
-      TEST_ERROR( "Expected result { 1, 2, 3, 4, 5 } but got something else." );
+      std::stringstream ss;
+      ss << "Expected result " << PrintVector( expected ) << " but got " << PrintVector( result );
+      TEST_ERROR( ss.str( ).c_str( ) );
     }
   }
 
@@ -156,7 +184,9 @@ static ErrorT test_element( )
 
     if ( result != expected )
     {
-      TEST_ERROR( "Expected result { 1, 2, 3, 4, 5 } but got something else." );
+      std::stringstream ss;
+      ss << "Expected result " << PrintVector( expected ) << " but got " << PrintVector( result );
+      TEST_ERROR( ss.str( ).c_str( ) );
     }
   }
 
@@ -177,7 +207,9 @@ static ErrorT test_range_for_each( )
 
   if ( myVec != result )
   {
-    TEST_ERROR( "Result vector didn't match original vector." );
+    std::stringstream ss;
+    ss << "Expected result " << PrintVector( myVec ) << " but got " << PrintVector( result );
+    TEST_ERROR( ss.str( ).c_str( ) );
   }
 
   return TEST_NO_ERROR;
@@ -187,11 +219,14 @@ static ErrorT test_range_find( )
 {
   IntVec myVec { 1, 2, 3, 4, 5 };
   Range myRange( myVec );
+  int expected = 3;
 
   // Test 'find'.
-  if ( auto element = find( myRange, 3 ); *element != 3 )
+  if ( auto element = find( myRange, expected ); *element != expected )
   {
-    TEST_ERROR( "Element '3' was not at position 3." );
+    std::stringstream ss;
+    ss << "Expected result " << expected << " but got " << *element;
+    TEST_ERROR( ss.str( ).c_str( ) );
   }
 
   return TEST_NO_ERROR;
@@ -254,7 +289,9 @@ static ErrorT test_generator( )
 
     if ( result != expected )
     {
-      TEST_ERROR( "Expected vector { 1, 2, 3 } but got something else." );
+      std::stringstream ss;
+      ss << "Expected result " << PrintVector( expected ) << " but got " << PrintVector( result );
+      TEST_ERROR( ss.str( ).c_str( ) );
     }
   }
 
@@ -271,7 +308,9 @@ static ErrorT test_generator( )
 
     if ( result != expected )
     {
-      TEST_ERROR( "Expected vector { 1, 2, 3 } but got something else." );
+      std::stringstream ss;
+      ss << "Expected result " << PrintVector( expected ) << " but got " << PrintVector( result );
+      TEST_ERROR( ss.str( ).c_str( ) );
     }
   }
 
@@ -288,7 +327,9 @@ static ErrorT test_generator( )
 
     if ( result != expected )
     {
-      TEST_ERROR( "Expected vector { 1, 2, 3 } but got something else." );
+      std::stringstream ss;
+      ss << "Expected result " << PrintVector( expected ) << " but got " << PrintVector( result );
+      TEST_ERROR( ss.str( ).c_str( ) );
     }
   }
 
@@ -307,7 +348,9 @@ static ErrorT test_generator_to_pipe( )
     IntVec expected { 0, 1, 2 };
     if ( results != expected )
     {
-      TEST_ERROR( "Expected vector { 0, 1, 2 } but got something else." );
+      std::stringstream ss;
+      ss << "Expected result " << PrintVector( expected ) << " but got " << PrintVector( results );
+      TEST_ERROR( ss.str( ).c_str( ) );
     }
   }
 
@@ -321,7 +364,9 @@ static ErrorT test_generator_to_pipe( )
     IntVec expected { 0, 3, 6 };
     if ( results != expected )
     {
-      TEST_ERROR( "Expected vector { 0, 3, 6 } but got something else." );
+      std::stringstream ss;
+      ss << "Expected result " << PrintVector( expected ) << " but got " << PrintVector( results );
+      TEST_ERROR( ss.str( ).c_str( ) );
     }
   }
 
@@ -341,7 +386,9 @@ static ErrorT test_pipe_range_to_pipe( )
 
     if ( result != expected )
     {
-      TEST_ERROR( "Expected vecotr { 1, 2, 3, 4, 5 } but got something else." );
+      std::stringstream ss;
+      ss << "Expected result " << PrintVector( expected ) << " but got " << PrintVector( result );
+      TEST_ERROR( ss.str( ).c_str( ) );
     }
   }
 
@@ -360,7 +407,9 @@ static ErrorT test_pipe_take( )
 
     if ( result != expected )
     {
-      TEST_ERROR( "Expected vector { 1, 2, 3, 4, 5 } but got something else." );
+      std::stringstream ss;
+      ss << "Expected result " << PrintVector( expected ) << " but got " << PrintVector( result );
+      TEST_ERROR( ss.str( ).c_str( ) );
     }
   }
 
@@ -368,14 +417,16 @@ static ErrorT test_pipe_take( )
   {
     IntVec expected { 0, 1, 2, 3, 4 };
     IntVec result;
-    auto integers = Integers( 100 );
+    auto integers = Integers( 0, 100 );
 
     integers >>= Take< int >( 5 )
              >>= PushBack( result );
 
     if ( result != expected )
     {
-      TEST_ERROR( "Expected vector { 1, 2, 3, 4, 5 } but got something else." );
+      std::stringstream ss;
+      ss << "Expected result " << PrintVector( expected ) << " but got " << PrintVector( result );
+      TEST_ERROR( ss.str( ).c_str( ) );
     }
   }
 
@@ -384,12 +435,14 @@ static ErrorT test_pipe_take( )
     IntVec expected { 0, 1, 2, 3, 4 };
     IntVec result;
 
-    Integers( 100 ) >>= Take< int >( 5 )
-                    >>= PushBack( result );
+    Integers( 0 ) >>= Take< int >( 5 )
+                  >>= PushBack( result );
 
     if ( result != expected )
     {
-      TEST_ERROR( "Expected vector { 1, 2, 3, 4, 5 } but got something else." );
+      std::stringstream ss;
+      ss << "Expected result " << PrintVector( expected ) << " but got " << PrintVector( result );
+      TEST_ERROR( ss.str( ).c_str( ) );
     }
   }
 
@@ -410,7 +463,9 @@ static ErrorT test_pipe_transform( )
 
     if ( result != expected )
     {
-      TEST_ERROR( "Expected vecotr { 1, 2, 3, 4, 5 } but got something else." );
+      std::stringstream ss;
+      ss << "Expected result " << PrintVector( expected ) << " but got " << PrintVector( result );
+      TEST_ERROR( ss.str( ).c_str( ) );
     }
   }
 
@@ -426,7 +481,9 @@ static ErrorT test_pipe_transform( )
 
     if ( result != expected )
     {
-      TEST_ERROR( "Expected result vecot { 2, 4, 6, 8, 10 } but got something else." );
+      std::stringstream ss;
+      ss << "Expected result " << PrintVector( expected ) << " but got " << PrintVector( result );
+      TEST_ERROR( ss.str( ).c_str( ) );
     }
   }
 
@@ -442,7 +499,9 @@ static ErrorT test_pipe_transform( )
 
     if ( result != expected )
     {
-      TEST_ERROR( R"(Expected result vector { "1", "2", "3", "4", "5" } but got something else.)" );
+      std::stringstream ss;
+      ss << "Expected result " << PrintVector( expected ) << " but got " << PrintVector( result );
+      TEST_ERROR( ss.str( ).c_str( ) );
     }
   }
 
