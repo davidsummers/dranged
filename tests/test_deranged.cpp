@@ -379,6 +379,20 @@ static ErrorT test_pipe_take( )
     }
   }
 
+  // Test 'take' pipe with an 'infinite' generator with no lambda.
+  {
+    IntVec expected { 0, 1, 2, 3, 4 };
+    IntVec result;
+
+    Integers( 100 ) >>= Take< int >( 5 )
+                    >>= PushBack( result );
+
+    if ( result != expected )
+    {
+      TEST_ERROR( "Expected vector { 1, 2, 3, 4, 5 } but got something else." );
+    }
+  }
+
   return TEST_NO_ERROR;
 }
 
