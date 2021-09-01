@@ -29,7 +29,10 @@ namespace dranged
   {
     for ( auto const &item : range_ )
     {
-      Send( item, pipeline_ );
+      if ( !Send( item, pipeline_ ) )
+      {
+        break;
+      }
     }
   }
 #endif
@@ -40,7 +43,10 @@ namespace dranged
   {
     for ( auto const &item : range_ )
     {
-      Send( item, pipe_ );
+      if ( !Send( item, pipe_ ) )
+      {
+        break;
+      }
     }
   }
 #endif

@@ -17,9 +17,10 @@ class PushBackPipe : PipeBase
 
 
     template< typename T >
-    void OnReceive( T && value_ )
+    bool OnReceive( T && value_ )
     {
       m_Container.push_back( value_ );
+      return true; // Continue
     }
 
   private:

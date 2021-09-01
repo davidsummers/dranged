@@ -19,9 +19,9 @@ class GenericPipeline : public PipelineBase
     }
 
     template< typename ValueType >
-    void OnReceive( ValueType && value_ )
+    bool OnReceive( ValueType && value_ )
     {
-      m_HeadPipe.template OnReceive< ValueType >( value_, m_TailPipeline );
+      return m_HeadPipe.template OnReceive< ValueType >( value_, m_TailPipeline );
     }
 
   private:
