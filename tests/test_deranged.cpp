@@ -83,7 +83,7 @@ static ErrorT test_border( )
     // Test Border.
     // Just make sure we can instantiate it.
     IntVec myVec { 1, 2, 3, 4, 5 };
-    Range range = myVec;
+    [[maybe_unused]] Range range = myVec;
 
     Border< IntVec > border0;
     Border< IntVec > bBegin( myVec.begin( ) );
@@ -350,15 +350,33 @@ static ErrorT test_pipe_range_to_pipe( )
 
 static ErrorT test_pipe_take( )
 {
-  IntVec myVec { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-  IntVec expected { 1, 2, 3, 4, 5 };
-  IntVec result;
-
-  myVec >>= Take< int >( 5 ) >>= PushBack( result );
-
-  if ( result != expected )
+  // Test 'take' pipe with a limited range.
   {
+    IntVec myVec { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    IntVec expected { 1, 2, 3, 4, 5 };
+    IntVec result;
+
+    myVec >>= Take< int >( 5 ) >>= PushBack( result );
+
+    if ( result != expected )
+    {
       TEST_ERROR( "Expected vector { 1, 2, 3, 4, 5 } but got something else." );
+    }
+  }
+
+  // Test 'take' pipe with an 'infinite' generator.
+  {
+    IntVec expected { 0, 1, 2, 3, 4 };
+    IntVec result;
+    auto integers = Integers( 100 );
+
+    integers >>= Take< int >( 5 )
+             >>= PushBack( result );
+
+    if ( result != expected )
+    {
+      TEST_ERROR( "Expected vector { 1, 2, 3, 4, 5 } but got something else." );
+    }
   }
 
   return TEST_NO_ERROR;
@@ -372,7 +390,7 @@ static ErrorT test_pipe_transform( )
   {
     std::vector< int > result;
 
-    auto pipe = Transform( [ ] ( int i_ ) { return i_ * 2; } ) >>= PushBack( result );
+    [[maybe_unused]] auto pipe = Transform( [ ] ( int i_ ) { return i_ * 2; } ) >>= PushBack( result );
 
     std::vector< int > expected;
 
