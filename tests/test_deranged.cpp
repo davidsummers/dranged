@@ -27,6 +27,7 @@
 #include "dranged/generators/generator.h"
 #include "dranged/pipes/pipe_operator.h"
 #include "dranged/pipes/pipe_push_back.h"
+#include "dranged/pipes/pipe_take.h"
 #include "dranged/pipes/pipe_transform.h"
 #include "dranged/ranges/algorithms.h"
 #include "dranged/ranges/border.h"
@@ -347,6 +348,22 @@ static ErrorT test_pipe_range_to_pipe( )
   return TEST_NO_ERROR;
 }
 
+static ErrorT test_pipe_take( )
+{
+  IntVec myVec { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+  IntVec expected { 1, 2, 3, 4, 5 };
+  IntVec result;
+
+  myVec >>= Take< int >( 5 ) >>= PushBack( result );
+
+  if ( result != expected )
+  {
+      TEST_ERROR( "Expected vector { 1, 2, 3, 4, 5 } but got something else." );
+  }
+
+  return TEST_NO_ERROR;
+}
+
 static ErrorT test_pipe_transform( )
 {
   // Test pipes: Transform >>= result.
@@ -427,6 +444,7 @@ struct test_descriptor_t test_funcs[] =
   TEST_PASS( test_generator,          "Basic Generator Tests" ),
   TEST_PASS( test_generator_to_pipe,  "Basic Generator to Pipe Tests" ),
   TEST_PASS( test_pipe_range_to_pipe, "Basic Pipe Range to Pipe Tests." ),
+  TEST_PASS( test_pipe_take,          "Basic Pipe Take Tests." ),
   TEST_PASS( test_pipe_transform,     "Basic Pipe Transform Tests." ),
   TEST_NULL
 };
