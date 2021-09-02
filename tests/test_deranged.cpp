@@ -115,14 +115,24 @@ static ErrorT test_border( )
     Border< IntVec > bBegin( myVec.begin( ) );
     Border< IntVec > bEnd( myVec.end(   ) );
 
-    if ( *( bBegin.element_after( ) ) != 1 )
+    int expected = 1;
+    int result =  *( bBegin.element_after( ) );
+
+    if ( result != expected )
     {
-      TEST_ERROR( "Expected element after begin border to be '1' but it was something else." );
+      std::stringstream ss;
+      ss << "Expected element after begin border to be " << expected << " but got " << result;
+      TEST_ERROR( ss.str( ).c_str( ) );
     }
 
-    if ( *( bEnd.element_before( ) ) != 5 )
+    expected = 5;
+    result = *( bEnd.element_before( ) );
+
+    if ( result != expected )
     {
-      TEST_ERROR( "Expected last element beofre end border to be '5' but it was something else." );
+      std::stringstream ss;
+      ss << "Expected last element beofre end border to be " << expected << " but got " << result;
+      TEST_ERROR( ss.str( ).c_str( ) );
     }
   }
 
