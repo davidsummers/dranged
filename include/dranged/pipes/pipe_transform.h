@@ -16,9 +16,9 @@ class TransformPipe : public PipeBase
     }
 
     template< typename VALUE, typename TailPipeline >
-    bool OnReceive( VALUE && value_, TailPipeline && tailPipeline_ )
+    bool OnReceive( VALUE && value_, TailPipeline && tailPipeline_, bool end_ )
     {
-      return Send( m_Function( value_ ), tailPipeline_ );
+      return Send( m_Function( value_ ), tailPipeline_, end_ );
     }
 
   private:

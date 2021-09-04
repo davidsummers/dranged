@@ -16,8 +16,13 @@ class TakePipe : public PipeBase
     }
 
     template< typename VALUE_TYPE, typename TailPipeline >
-    bool OnReceive( VALUE_TYPE && value_, TailPipeline && tailPipeline_ )
+    bool OnReceive( VALUE_TYPE && value_, TailPipeline && tailPipeline_, bool end_ )
     {
+      if ( end_ )
+      {
+        return Send( value_, tailPipeline_, end_ );
+      }
+
       if ( m_CurrentCount >= m_Total )
       {
         return false; // Stop pipe.
@@ -25,7 +30,7 @@ class TakePipe : public PipeBase
 
       m_CurrentCount++;
 
-      return Send( value_, tailPipeline_ );
+      return Send( value_, tailPipeline_, end_ );
     }
 
   private:

@@ -17,8 +17,9 @@ namespace dranged
   {
     for ( auto const &item : range_ )
     {
-      if ( !Send( item, pipeline_ ) )
+      if ( !Send( item, pipeline_, false ) ) // false means "this is not the end".
       {
+        Send( item, pipeline_, true ); // true means "this is the end".
         break;
       }
     }
@@ -30,8 +31,9 @@ namespace dranged
   {
     for ( auto const &item : range_ )
     {
-      if ( !Send( item, pipeline_ ) )
+      if ( !Send( item, pipeline_, false ) ) // false means "this is not the end".
       {
+        Send( item, pipeline_, true ); // true means "this is the end".
         break;
       }
     }
@@ -43,8 +45,9 @@ namespace dranged
   {
     for ( auto const &item : range_ )
     {
-      if ( !Send( item, pipe_ ) )
+      if ( !Send( item, pipe_, false ) ) // false means "this is not the end".
       {
+        Send( item, pipe_, true ); // true means "this is the end".
         break;
       }
     }
