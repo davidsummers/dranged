@@ -87,6 +87,7 @@ set( INCLUDE_HELPER_FILES
 set( INCLUDE_PIPE_FILES
      ${CMAKE_SOURCE_DIR}/include/dranged/pipes/pipe_operator.h
      ${CMAKE_SOURCE_DIR}/include/dranged/pipes/pipe_push_back.h
+     ${CMAKE_SOURCE_DIR}/include/dranged/pipes/pipe_reverse.h
      ${CMAKE_SOURCE_DIR}/include/dranged/pipes/pipe_source.h
      ${CMAKE_SOURCE_DIR}/include/dranged/pipes/pipe_take.h
      ${CMAKE_SOURCE_DIR}/include/dranged/pipes/pipe_transform.h

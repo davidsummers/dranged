@@ -27,6 +27,7 @@
 #include "dranged/generators/generator.h"
 #include "dranged/pipes/pipe_operator.h"
 #include "dranged/pipes/pipe_push_back.h"
+#include "dranged/pipes/pipe_reverse.h"
 #include "dranged/pipes/pipe_take.h"
 #include "dranged/pipes/pipe_transform.h"
 #include "dranged/ranges/algorithms.h"
@@ -38,7 +39,7 @@ using namespace dranged;
 
 using IntVec = std::vector< int >;
 
-Generator< int > Integers( int start_ = 0, uint64_t max_ = 0 )
+Generator< int > Integers( int start_ = 0, int max_ = 0 )
 {
     for ( int i = start_; max_ == 0 || i <= max_; i++ )
     {
@@ -405,6 +406,27 @@ static ErrorT test_pipe_range_to_pipe( )
   return TEST_NO_ERROR;
 }
 
+static ErrorT test_pipe_reverse( )
+{
+  // Test reverse pipe.
+  {
+    std::vector< int > myInts { 1, 2, 3, 4, 5 };
+    std::vector< int > expected { 5, 4, 3, 2, 1 };
+    std::vector< int > result;
+
+    myInts >>= Reverse< int >( ) >>= PushBack( result );
+
+    if ( result != expected )
+    {
+      std::stringstream ss;
+      ss << "Expected result " << PrintVector( expected ) << " but got " << PrintVector( result );
+      TEST_ERROR( ss.str( ).c_str( ) );
+    }
+  }
+
+  return TEST_NO_ERROR;
+}
+
 static ErrorT test_pipe_take( )
 {
   // Test 'take' pipe with a limited range.
@@ -545,6 +567,7 @@ struct test_descriptor_t test_funcs[] =
   TEST_PASS( test_generator,          "Basic Generator Tests" ),
   TEST_PASS( test_generator_to_pipe,  "Basic Generator to Pipe Tests" ),
   TEST_PASS( test_pipe_range_to_pipe, "Basic Pipe Range to Pipe Tests." ),
+  TEST_PASS( test_pipe_reverse,       "Basic Pipe Reverse Tests." ),
   TEST_PASS( test_pipe_take,          "Basic Pipe Take Tests." ),
   TEST_PASS( test_pipe_transform,     "Basic Pipe Transform Tests." ),
   TEST_NULL
